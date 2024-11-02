@@ -1,0 +1,46 @@
+piece_name: Name of Piece
+parts:
+  - name: Score
+    start_page: 1
+  - name: Soprano Cornet
+    start_page: -8
+  - name: Solo Cornet
+    start_page: -1
+  - name: Repiano Cornet
+    start_page: -1
+  - name: 2nd Cornet
+    start_page: -1
+  - name: 3rd Cornet
+    start_page: -1
+  - name: Flugelhorn
+    start_page: -1
+  - name: Solo Horn
+    start_page: -1
+  - name: 1st Horn
+    start_page: -1
+  - name: 2nd Horn
+    start_page: -1
+  - name: 1st Baritone
+    start_page: -1
+  - name: 2nd Baritone
+    start_page: -1
+  - name: 1st Trombone
+    start_page: -1
+  - name: 2nd Trombone
+    start_page: -1
+  - name: Bass Trombone
+    start_page: -1
+  - name: Euphonium
+    start_page: -1
+  - name: Eb Bass
+    start_page: -1
+  - name: Bb Bass
+    start_page: -1
+  - name: Percussion 1
+    start_page: -1
+  - name: Percussion 2
+    start_page: -1
+  - name: Percussion 3
+    start_page: -1
+  - name: Percussion 4
+    start_page: -1
