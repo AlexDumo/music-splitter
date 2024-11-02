@@ -3,7 +3,7 @@ parts:
   - name: Score
     start_page: 1
   - name: Soprano Cornet
-    start_page: -8
+    start_page: 10
   - name: Solo Cornet
     start_page: -1
   - name: Repiano Cornet
