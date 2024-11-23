@@ -1,13 +1,22 @@
+# Copy this file into the folder with the large PDF
 piece_name: Name of Piece
+start_index: 0 # This is just for the naming of files. It doesn't affect page numbers
 parts:
+  # Provide the name of each the part
   - name: Score
+    # Provide the page where the part starts
     start_page: 1
   - name: Soprano Cornet
+    # For this example, this mean the score is pages 1-9 and the Soprano part starts on pg 10
     start_page: 10
   - name: Solo Cornet
+    # You can also provide a negative number to denote the # of pages of the *previous* part
+    # For this example, the Soprano Cornet part is 1 page
     start_page: -1
   - name: Repiano Cornet
-    start_page: -1
+    # For this example, the Solo Cornet part is 2 pages
+    # This is useful so you don't have to keep track of starting page numbers
+    start_page: -2
   - name: 2nd Cornet
     start_page: -1
   - name: 3rd Cornet

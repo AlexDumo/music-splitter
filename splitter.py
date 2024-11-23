@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 
-def split_pdf(dir: Path):
+def split_pdf(dir: Path, password = None):
     yaml_file = next(dir.glob("*.yaml"), None)
     if yaml_file is None:
         print(
@@ -15,6 +15,7 @@ def split_pdf(dir: Path):
         return
     with open(yaml_file, "r") as file:
         data = yaml.safe_load(file)
+    start_index = data["start_index"] if "start_index" in data else 1
 
     pdf_files = [file for file in dir.glob("*.pdf")]
     if len(pdf_files) == 0:
@@ -36,6 +37,15 @@ def split_pdf(dir: Path):
     with open(pdf_path, "rb") as pdf_file:
         reader = PyPDF2.PdfReader(pdf_file)
 
+        if password is not None and reader.is_encrypted:
+            print("Decrypting pdf with provided password")
+            reader.decrypt(password)
+        elif password is not None:
+            print("Password provided, but PDF is not encrypted. Ignoring password...")
+        elif reader.is_encrypted:
+            print("PDF file is encrypted. Please provide a password with the '-p' flag")
+            return
+
         current_page = parts[0]["start_page"] - 1
 
         def get_start_page(part, current_page):
@@ -56,7 +66,7 @@ def split_pdf(dir: Path):
             for page_num in range(start_page, end_page):
                 writer.add_page(reader.pages[page_num])
 
-            output_path = dir / f"{i} - {piece_name} - {part['name']}.pdf"
+            output_path = dir / f"{i + start_index} - {piece_name} - {part['name']}.pdf"
             with open(output_path, "wb") as output_file:
                 writer.write(output_file)
             print(f"Created: '{output_path.name}'")
@@ -73,9 +83,10 @@ if __name__ == "__main__":
         type=Path,
         help="The directory containing the PDF file and YAML file.",
     )
+    parser.add_argument('-p', '--password', help="The password to the PDF (if it has one)")
     args = parser.parse_args()
     if(args.dir.is_dir()):
-        split_pdf(args.dir)
+        split_pdf(args.dir, password=args.password)
     else:
         print(f"Directory '{args.dir}' does not exist.")
         exit(1)
